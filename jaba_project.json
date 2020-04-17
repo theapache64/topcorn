@@ -1,0 +1,12 @@
+{
+  "name": "Topcorn",
+  "dir": "/home/theapache64/Documents/projects/topcorn",
+  "packageName": "com.theapache64.topcorn",
+  "architecture": 1,
+  "isNeedGoogleFontsModule": true,
+  "isNeedNetworkModule": true,
+  "baseUrl": "http://omdbapi.com/",
+  "isNeedRoomSupport": true,
+  "isNeedSplashScreen": true,
+  "isNeedLogInScreen": false
+}

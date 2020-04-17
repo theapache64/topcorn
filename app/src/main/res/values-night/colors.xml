@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryTextColor">@color/grey_300</color>
+    <color name="secondaryTextColor">@color/grey_400</color>
+    <color name="toolbarIconColor">@color/grey_300</color>
+</resources>

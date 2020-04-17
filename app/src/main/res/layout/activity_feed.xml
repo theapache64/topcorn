@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.theapache64.topcorn.ui.activities.feed.FeedViewModel" />
+
+        <variable
+            name="handler"
+            type="com.theapache64.topcorn.ui.activities.feed.FeedHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activities.feed.FeedActivity">
+
+        <!--Movium title-->
+        <TextView
+            android:id="@+id/tv_title"
+            fontPath="fonts/GoogleSans-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="@string/app_name"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--Heart-->
+        <ImageButton
+            android:id="@+id/ib_github"
+            android:layout_width="@dimen/toolbar_icon_wh"
+            android:layout_height="@dimen/toolbar_icon_wh"
+            android:layout_margin="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{()-> handler.onHeartClicked()}"
+            android:src="@drawable/ic_heart"
+            android:tint="@color/red_800"
+            app:layout_constraintBottom_toBottomOf="@id/ib_dark_mode"
+            app:layout_constraintEnd_toStartOf="@id/ib_dark_mode"
+            app:layout_constraintTop_toTopOf="@id/ib_dark_mode"
+            tools:ignore="ContentDescription" />
+
+        <!--Dark Mode-->
+        <ImageButton
+            android:id="@+id/ib_dark_mode"
+            android:layout_width="@dimen/toolbar_icon_wh"
+            android:layout_height="@dimen/toolbar_icon_wh"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{()->handler.onToggleDarkModeClicked()}"
+            android:src="@drawable/ic_switch_dark_mode"
+            android:tint="@color/toolbarIconColor"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            tools:ignore="ContentDescription" />
+
+        <!--Feed-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_feed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:listitem="@layout/item_feed" />
+
+        <com.theapache64.twinkill.ui.widgets.LoadingView
+            android:id="@+id/lv_feed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

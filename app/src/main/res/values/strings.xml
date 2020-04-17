@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TopCorn</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_rating">"Rating: "</string>
+    <string name="label_director">"Director: "</string>
+    <string name="label_starring">"Starring: "</string>
+    <string name="label_genre">"Genre: "</string>
+    <string name="action_open_imdb">OPEN IMDB</string>
+
+
+</resources>

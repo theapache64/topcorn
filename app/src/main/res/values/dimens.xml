@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">32dp</dimen>
+    <dimen name="toolbar_icon_wh">32dp</dimen>
+    <dimen name="movie_details_top_margin">6dp</dimen>
+</resources>
