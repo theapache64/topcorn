@@ -96,7 +96,7 @@ This project follows the famous MVVM architecture and best practices from Google
 - 🤓 Icons are from [flaticon.com](https://www.flaticon.com/) 
 - 🖌️ Design inspired from [AnimeXStream](https://github.com/mukul500/AnimeXStream) 
 - 💽 Data from [top250 API](https://github.com/theapache64/top250)
-- 📄 Thanks [PatilShreyas](https://github.com/PatilShreyas) for the README update 
+- 📄 Thanks [Foodium](https://github.com/patilshreyas/Foodium)
 
 ## TODO 🗒️
 
