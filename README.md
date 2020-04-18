@@ -1,12 +1,20 @@
+
+![title](extras/title.png)
+![light_screenshots](extras/light.png)
+
 # TopCorn 🍿
 
-A minimalistic movie  listing app to list IMDB's top 250 movies of all time,
-built to *demonstrate latest hot trending Android development tools*.
+A minimalist movie listing app to browse IMDB's top 250 movies of all time,
+built to *demonstrate latest hot-trending Android development tools*.
 
-![light_screenshots](extras/light.png)
+## Dark Mode Supported 🌙
 ![dark_screenshots](extras/dark.png)
 
+## 
 
+## TODO
+
+  -[ ] Add test cases
 
 ## Author
 
