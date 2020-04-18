@@ -1,6 +1,5 @@
 package com.theapache64.topcorn.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,16 +8,18 @@ import com.theapache64.topcorn.databinding.ItemFeedBinding
 import com.theapache64.topcorn.models.FeedItem
 
 class FeedAdapter(
-    context: Context,
     private val feedItems: List<FeedItem>,
     private val getMoviesAdapter: (List<Movie>) -> MoviesAdapter,
     private val callback: (position: Int) -> Unit
 ) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    private val inflater = LayoutInflater.from(context)
+    private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemFeedBinding.inflate(inflater, parent, false)
+        if (inflater == null) {
+            inflater = LayoutInflater.from(parent.context)
+        }
+        val binding = ItemFeedBinding.inflate(inflater!!, parent, false)
         return ViewHolder(binding)
     }
 

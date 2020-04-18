@@ -1,6 +1,5 @@
 package com.theapache64.topcorn.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,15 +9,17 @@ import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ItemMovieBinding
 
 class MoviesAdapter(
-    private val context: Context,
     private val movies: List<Movie>,
     private val callback: (position: Int, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
 ) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-    private val inflater = LayoutInflater.from(context)
+    private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemMovieBinding.inflate(inflater, parent, false)
+        if (inflater == null) {
+            inflater = LayoutInflater.from(parent.context)
+        }
+        val binding = ItemMovieBinding.inflate(inflater!!, parent, false)
         return ViewHolder(binding)
     }
 

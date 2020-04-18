@@ -63,17 +63,21 @@ class FeedActivity : BaseAppCompatActivity(), FeedHandler {
                     binding.lvFeed.hideLoading()
                     binding.rvFeed.visibility = View.VISIBLE
 
-                    val adapter = FeedAdapter(this, it.data!!, { movies ->
-                        MoviesAdapter(this, movies) { position, poster, title ->
-                            info("Movie clicked $position")
-                            val movie = movies[position]
-                            goToMovieActivity(movie, poster, title)
-                        }.apply {
-                            setHasStableIds(true)
+                    val adapter = FeedAdapter(
+                        it.data!!,
+                        { movies ->
+                            MoviesAdapter(movies) { position, poster, title ->
+                                info("Movie clicked $position")
+                                val movie = movies[position]
+                                goToMovieActivity(movie, poster, title)
+                            }.apply {
+                                setHasStableIds(true)
+                            }
+                        },
+                        { position ->
+                            info("Feed item clicked $position")
                         }
-                    }) { position ->
-                        info("Feed item clicked $position")
-                    }.apply {
+                    ).apply {
                         setHasStableIds(true)
                     }
 
