@@ -136,3 +136,4 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/kotlin,intellij,gradle
 SecretConstants.kt
+*.apk

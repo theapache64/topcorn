@@ -1,18 +1,18 @@
-
 ![title](extras/title.png)
+
 ![light_screenshots](extras/light.png)
 
 # TopCorn 🍿
 
-A minimalist movie listing app to browse IMDB's top 250 movies of all time,
+A minimalistic movie listing app to browse IMDB's top 250 movies,
 built to *demonstrate MVVM with latest hot-trending Android development tools*.
 
 ## Dark Mode Available 🌙
 ![dark_screenshots](extras/dark.png)
 
-## Download
+## Download 📥
 
-- Download APK from [here](topcorn.apk)
+- Download latest APK from [releases](https://github.com/theapache64/topcorn/releases)
 
 ## Built With 🛠
 
@@ -34,6 +34,62 @@ built to *demonstrate MVVM with latest hot-trending Android development tools*.
 - [TwinKill](https://github.com/theapache64/twinkill) - A simple library, a collection of utility classes wrapped around JetPack components 
 - [MaterialColors](https://github.com/theapache64/material_colors) - Android material color palettes
 
+## Architecture
+
+This project follows the famous MVVM architecture and best practices from Google's [GithubBrowserSample](https://github.com/android/architecture-components-samples/tree/master/GithubBrowserSample)
+
+![](extras/arch.png)
+
+## Project Structure
+
+```
+├── App.kt
+├── data
+│   ├── local
+│   │   ├── AppDatabase.kt
+│   │   ├── Converters.kt
+│   │   ├── daos
+│   │   │   └── MoviesDao.kt
+│   │   └── entities
+│   ├── remote
+│   │   ├── ApiInterface.kt
+│   │   └── Movie.kt
+│   └── repositories
+│       └── MoviesRepo.kt
+├── di
+│   ├── components
+│   │   └── AppComponent.kt
+│   └── modules
+│       ├── ActivitiesBuilderModule.kt
+│       ├── AppModule.kt
+│       ├── DatabaseModule.kt
+│       ├── NetworkModule.kt
+│       └── ViewModelModule.kt
+├── models
+│   └── FeedItem.kt
+├── ui
+│   ├── activities
+│   │   ├── feed
+│   │   │   ├── FeedActivity.kt
+│   │   │   ├── FeedHandler.kt
+│   │   │   └── FeedViewModel.kt
+│   │   ├── movie
+│   │   │   ├── MovieActivity.kt
+│   │   │   ├── MovieHandler.kt
+│   │   │   └── MovieViewModel.kt
+│   │   └── splash
+│   │       ├── SplashActivity.kt
+│   │       └── SplashViewModel.kt
+│   └── adapters
+│       ├── FeedAdapter.kt
+│       └── MoviesAdapter.kt
+└── utils
+    ├── BindingAdapters.kt
+    ├── NetworkBoundResource.kt
+    └── retrofit
+        ├── FlowResourceCallAdapterFactory.kt
+        └── FlowResourceCallAdapter.kt
+```
 
 ## Credits 🤗
 
@@ -44,8 +100,10 @@ built to *demonstrate MVVM with latest hot-trending Android development tools*.
 
 ## TODO
 
+  - [ ] Improve algorithms and code review 
   - [ ] Add test cases
-  - [ ] Integrate OMBB API to add search feature
+  - [ ] Integrate OMDB API to add search feature
+  - [ ] Add favorites
 
 ## Author
 
