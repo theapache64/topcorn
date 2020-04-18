@@ -42,7 +42,8 @@ class SplashActivity : BaseAppCompatActivity() {
 
         })
 
-        // Starting splash timer
+        // Starting splash timer. This is just to show splash screen for a second.
+        // Can be removed if you want don't want to see the splash.
         Handler().postDelayed({
             viewModel.goToNextScreen()
         }, SPLASH_DURATION)
