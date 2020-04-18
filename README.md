@@ -34,13 +34,13 @@ built to *demonstrate MVVM with latest hot-trending Android development tools*.
 - [TwinKill](https://github.com/theapache64/twinkill) - A simple library, a collection of utility classes wrapped around JetPack components 
 - [MaterialColors](https://github.com/theapache64/material_colors) - Android material color palettes
 
-## Architecture
+## Architecture 🗼
 
 This project follows the famous MVVM architecture and best practices from Google's [GithubBrowserSample](https://github.com/android/architecture-components-samples/tree/master/GithubBrowserSample)
 
 ![](extras/arch.png)
 
-## Project Structure
+## Project Structure 📂
 
 ```
 ├── App.kt
@@ -98,13 +98,13 @@ This project follows the famous MVVM architecture and best practices from Google
 - 💽 Data from [top250 API](https://github.com/theapache64/top250)
 - 📄 Thanks [PatilShreyas](https://github.com/PatilShreyas) for the README update 
 
-## TODO
+## TODO 🗒️
 
   - [ ] Improve algorithms and code review 
   - [ ] Add test cases
   - [ ] Integrate OMDB API to add search feature
   - [ ] Add favorites
 
-## Author
+## Author ✍️
 
 - theapache64
