@@ -2,7 +2,6 @@ package com.theapache64.topcorn.ui.activities.splash
 
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.theapache64.topcorn.R
@@ -27,7 +26,7 @@ class SplashActivity : BaseAppCompatActivity() {
         binding.viewModel = viewModel
 
         // Watching activity launch command
-        viewModel.getLaunchActivityEvent().observe(this, Observer { activityName ->
+        viewModel.launchActivityEvent.observe(this, Observer { activityName ->
 
             when (activityName) {
 
@@ -39,20 +38,7 @@ class SplashActivity : BaseAppCompatActivity() {
             }
 
             finish()
-
         })
-
-        // Starting splash timer. This is just to show splash screen for a second.
-        // Can be removed if you want don't want to see the splash.
-        Handler().postDelayed({
-            viewModel.goToNextScreen()
-        }, SPLASH_DURATION)
-
-    }
-
-
-    companion object {
-        private const val SPLASH_DURATION = 1000L
     }
 
 }
