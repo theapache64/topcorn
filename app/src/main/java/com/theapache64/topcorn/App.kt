@@ -26,7 +26,6 @@ class App : Application(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
-
     override fun onCreate() {
         super.onCreate()
 

@@ -1,7 +1,9 @@
 package com.theapache64.topcorn.utils.retrofit
 
 import com.theapache64.twinkill.network.utils.Resource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import retrofit2.Call
 import retrofit2.CallAdapter
@@ -20,25 +22,25 @@ class FlowResourceCallAdapter<R>(
 
     override fun responseType() = responseType
 
+    @ExperimentalCoroutinesApi
     override fun adapt(call: Call<R>): Flow<Resource<R>> = flow {
 
         // Firing loading resource
         emit(Resource.loading())
 
-        try {
-            val resp = call.awaitResponse()
+        val resp = call.awaitResponse()
 
-            if (resp.isSuccessful) {
-                emit(Resource.create(resp, isNeedDeepCheck))
-            } else {
-                emit(Resource.create<R>(Throwable(resp.message())))
-            }
-        } catch (e: Throwable) {
-            if (isSelfExceptionHandling) {
-                emit(Resource.create<R>(e))
-            } else {
-                throw e
-            }
+        if (resp.isSuccessful) {
+            emit(Resource.create(resp, isNeedDeepCheck))
+        } else {
+            emit(Resource.create<R>(Throwable(resp.message())))
+        }
+
+    }.catch { error ->
+        if (isSelfExceptionHandling) {
+            emit(Resource.create<R>(error))
+        } else {
+            throw error
         }
     }
 }
