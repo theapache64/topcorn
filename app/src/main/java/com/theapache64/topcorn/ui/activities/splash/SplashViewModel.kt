@@ -9,10 +9,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class SplashViewModel @Inject constructor() : ViewModel() {
+class SplashViewModel @Inject constructor(
+    defaultDispatcher: CoroutineContext
+) : ViewModel() {
 
     companion object {
         val TAG = SplashViewModel::class.java.simpleName
@@ -25,5 +29,6 @@ class SplashViewModel @Inject constructor() : ViewModel() {
     @FlowPreview
     val launchActivityEvent = flowOf(FeedActivity::class.simpleName)
         .onStart { delay(SPLASH_DURATION) }
+        .flowOn(defaultDispatcher)
         .asLiveData(viewModelScope.coroutineContext)
 }

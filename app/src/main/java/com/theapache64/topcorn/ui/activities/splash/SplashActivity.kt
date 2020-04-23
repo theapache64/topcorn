@@ -10,6 +10,7 @@ import com.theapache64.topcorn.ui.activities.feed.FeedActivity
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 class SplashActivity : BaseAppCompatActivity() {
@@ -17,6 +18,7 @@ class SplashActivity : BaseAppCompatActivity() {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
+    @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
