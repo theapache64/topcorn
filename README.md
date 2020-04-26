@@ -1,4 +1,9 @@
 ![title](extras/title.png)
+[![GitHub issues](https://img.shields.io/github/issues/theapache64/topcorn)](https://github.com/theapache64/topcorn/issues)
+[![GitHub forks](https://img.shields.io/github/forks/theapache64/topcorn)](https://github.com/theapache64/topcorn/network)
+[![GitHub stars](https://img.shields.io/github/stars/theapache64/topcorn)](https://github.com/theapache64/topcorn/stargazers)
+[![GitHub license](https://img.shields.io/github/license/theapache64/topcorn)](https://github.com/theapache64/topcorn/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/url?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftheapache64%2Ftopcorn)
 
 ![light_screenshots](extras/light.png)
 
