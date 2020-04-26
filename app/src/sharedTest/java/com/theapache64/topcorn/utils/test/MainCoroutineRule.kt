@@ -1,4 +1,4 @@
-package com.theapache64.topcorn.testutils
+package com.theapache64.topcorn.utils.test
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,7 +10,9 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
-class MainCoroutineRule(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) :
+class MainCoroutineRule(
+    val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+) :
     TestWatcher(),
     TestCoroutineScope by TestCoroutineScope(dispatcher) {
 

@@ -32,9 +32,6 @@ abstract class NetworkBoundResource<DB, REMOTE> {
         debug("----------------------")
         debug("Starting...")
 
-        // sending loading status
-        debug("Sending loading...")
-        emit(Resource.loading())
 
         val localData = fetchFromLocal().first()
 
@@ -79,6 +76,9 @@ abstract class NetworkBoundResource<DB, REMOTE> {
     @ExperimentalCoroutinesApi
     private suspend fun FlowCollector<Resource<DB>>.emitLocalDbData() {
         info("Sending local data to UI")
+        // sending loading status
+        emit(Resource.loading())
+
         emitAll(fetchFromLocal().map { dbData ->
             info("Sending local...")
             Resource.success(dbData)

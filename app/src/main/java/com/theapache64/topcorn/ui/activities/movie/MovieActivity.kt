@@ -16,7 +16,8 @@ import javax.inject.Inject
 class MovieActivity : BaseAppCompatActivity(), MovieHandler {
 
     companion object {
-        private const val KEY_MOVIE = "movie"
+        const val KEY_MOVIE = "movie"
+        const val IMDB_DOT_COM = "https://imdb.com"
         fun getStartIntent(context: Context, movie: Movie): Intent {
             return Intent(context, MovieActivity::class.java).apply {
                 // data goes here
@@ -53,7 +54,7 @@ class MovieActivity : BaseAppCompatActivity(), MovieHandler {
     override fun onGoToImdbClicked() {
         val intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("https://imdb.com${viewModel.movie!!.imdbUrl}")
+            Uri.parse("$IMDB_DOT_COM${viewModel.movie!!.imdbUrl}")
         )
         startActivity(intent)
     }

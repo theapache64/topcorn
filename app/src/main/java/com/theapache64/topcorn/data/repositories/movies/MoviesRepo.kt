@@ -1,4 +1,4 @@
-package com.theapache64.topcorn.data.repositories
+package com.theapache64.topcorn.data.repositories.movies
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -6,6 +6,7 @@ import com.theapache64.topcorn.data.local.daos.MoviesDao
 import com.theapache64.topcorn.data.remote.ApiInterface
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.utils.NetworkBoundResource
+import com.theapache64.topcorn.utils.test.OpenForTesting
 import com.theapache64.twinkill.network.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,11 +16,13 @@ import javax.inject.Inject
 import kotlin.time.ExperimentalTime
 import kotlin.time.hours
 
+@OpenForTesting
 class MoviesRepo @Inject constructor(
     private val sharedPref: SharedPreferences,
     private val apiInterface: ApiInterface,
     private val moviesDao: MoviesDao
 ) {
+
     companion object {
         @ExperimentalTime
         private val MOVIE_EXPIRY_IN_MILLIS = 1.hours.inMilliseconds.toLong()
@@ -55,8 +58,7 @@ class MoviesRepo @Inject constructor(
                         isExpired(lastSynced)
             }
 
-        }.asFlow()
-            .flowOn(Dispatchers.IO)
+        }.asFlow().flowOn(Dispatchers.IO)
     }
 
     @ExperimentalTime

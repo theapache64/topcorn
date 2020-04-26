@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_movie"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp">

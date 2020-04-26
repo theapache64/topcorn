@@ -1,4 +1,4 @@
-package com.theapache64.topcorn.testutils
+package com.theapache64.topcorn.utils.test
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

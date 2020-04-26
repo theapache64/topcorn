@@ -2,25 +2,21 @@ package com.theapache64.topcorn.ui.activities.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.theapache64.topcorn.BuildConfig
 import com.theapache64.topcorn.ui.activities.feed.FeedActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class SplashViewModel @Inject constructor(
-    defaultDispatcher: CoroutineContext
 ) : ViewModel() {
 
     companion object {
         val TAG = SplashViewModel::class.java.simpleName
-        private const val SPLASH_DURATION = 1_000L
+        const val SPLASH_DURATION = 1_000L
     }
 
     val versionName = "v${BuildConfig.VERSION_NAME}"
@@ -28,7 +24,10 @@ class SplashViewModel @Inject constructor(
     @ExperimentalCoroutinesApi
     @FlowPreview
     val launchActivityEvent = flowOf(FeedActivity::class.simpleName)
-        .onStart { delay(SPLASH_DURATION) }
-        .flowOn(defaultDispatcher)
-        .asLiveData(viewModelScope.coroutineContext)
+        .onStart {
+            delay(SPLASH_DURATION)
+        }
+        .asLiveData()
+
+
 }

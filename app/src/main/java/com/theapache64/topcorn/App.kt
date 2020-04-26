@@ -18,11 +18,12 @@ import javax.inject.Inject
 class App : Application(), HasAndroidInjector {
 
     companion object {
-        private const val BASE_URL = "https://raw.githubusercontent.com/theapache64/top250/master/"
+        const val BASE_URL = "https://raw.githubusercontent.com/theapache64/top250/master/"
     }
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -35,8 +36,7 @@ class App : Application(), HasAndroidInjector {
         DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
             .baseNetworkModule(BaseNetworkModule(BASE_URL))
-            .build()
-            .inject(this)
+            .build().inject(this)
 
         // TwinKill
         TwinKill.init(

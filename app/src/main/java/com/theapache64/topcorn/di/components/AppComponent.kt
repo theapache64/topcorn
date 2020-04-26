@@ -13,6 +13,7 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
+
     // inject the above given modules into this App class
     fun inject(app: App)
 }

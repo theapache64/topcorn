@@ -5,6 +5,7 @@ import com.theapache64.topcorn.data.remote.Movie
 import javax.inject.Inject
 
 class MovieViewModel @Inject constructor() : ViewModel() {
+
     fun init(movie: Movie) {
         this.movie = movie
     }

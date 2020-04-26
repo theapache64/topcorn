@@ -14,7 +14,8 @@ import dagger.android.support.AndroidSupportInjectionModule
         DatabaseModule::class,
         ViewModelModule::class,
         PreferenceModule::class,
-        ActivitiesBuilderModule::class
+        ActivitiesBuilderModule::class,
+        RepoModule::class
     ]
 )
 class AppModule(private val application: Application) {

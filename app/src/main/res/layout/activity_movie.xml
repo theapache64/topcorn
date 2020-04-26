@@ -185,6 +185,7 @@
 
             <!--Goto imdb-->
             <Button
+                android:id="@+id/b_movie_open_imdb"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

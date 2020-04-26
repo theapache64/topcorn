@@ -17,6 +17,7 @@ import com.theapache64.topcorn.databinding.ActivityFeedBinding
 import com.theapache64.topcorn.ui.activities.movie.MovieActivity
 import com.theapache64.topcorn.ui.adapters.FeedAdapter
 import com.theapache64.topcorn.ui.adapters.MoviesAdapter
+import com.theapache64.topcorn.utils.test.EspressoIdlingResource
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -29,7 +30,7 @@ import kotlin.time.ExperimentalTime
 class FeedActivity : BaseAppCompatActivity(), FeedHandler {
 
     companion object {
-
+        const val GITHUB_URL = "https://github.com/theapache64/topcorn"
         fun getStartIntent(context: Context): Intent {
             return Intent(context, FeedActivity::class.java).apply {
                 // add data here
@@ -127,7 +128,7 @@ class FeedActivity : BaseAppCompatActivity(), FeedHandler {
         // goto github page ;)
         val intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("https://github.com/theapache64/topcorn")
+            Uri.parse(GITHUB_URL)
         )
         startActivity(intent)
     }

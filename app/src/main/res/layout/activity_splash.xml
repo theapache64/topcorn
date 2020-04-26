@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/iv_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_logo"
