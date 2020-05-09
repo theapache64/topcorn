@@ -1,0 +1,18 @@
+{
+ "added": [
+  {
+   "id": 1,
+   "type": "implementation",
+   "installed_name": "recyclerview",
+   "gpm_dep": {
+    "artifact_id": "recyclerview",
+    "default_type": "implementation",
+    "docs": "https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview",
+    "get_from": "Google",
+    "group_id": "androidx.recyclerview",
+    "name": "Android Support RecyclerView V7",
+    "description": "Android Support RecyclerView v7"
+   }
+  }
+ ]
+}
