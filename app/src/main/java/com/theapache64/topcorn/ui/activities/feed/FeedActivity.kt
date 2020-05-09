@@ -17,7 +17,6 @@ import com.theapache64.topcorn.databinding.ActivityFeedBinding
 import com.theapache64.topcorn.ui.activities.movie.MovieActivity
 import com.theapache64.topcorn.ui.adapters.FeedAdapter
 import com.theapache64.topcorn.ui.adapters.MoviesAdapter
-import com.theapache64.topcorn.utils.test.EspressoIdlingResource
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
