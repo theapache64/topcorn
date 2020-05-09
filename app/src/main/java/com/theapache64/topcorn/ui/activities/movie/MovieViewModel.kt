@@ -16,10 +16,10 @@ class MovieViewModel @Inject constructor() : ViewModel() {
     var movie: Movie? = null
 
     fun onBackButtonClicked() {
-
+        closeActivity.value = true
     }
 
     fun onGoToImdbClicked() {
-
+        openImdb.value = true
     }
 }
