@@ -17,7 +17,7 @@ built to *demonstrate MVVM with latest hot-trending Android development tools*.
 
 ## Download 📥
 
-- Download latest APK from [releases](https://github.com/theapache64/topcorn/releases)
+- Download latest APK from [here](https://github.com/theapache64/topcorn/latest/releases/download/app-release.apk)
 
 ## Built With 🛠
 
@@ -48,6 +48,7 @@ This project follows the famous MVVM architecture and best practices from Google
 ## Project Structure 📂
 
 ```
+.
 ├── App.kt
 ├── data
 │   ├── local
@@ -60,7 +61,8 @@ This project follows the famous MVVM architecture and best practices from Google
 │   │   ├── ApiInterface.kt
 │   │   └── Movie.kt
 │   └── repositories
-│       └── MoviesRepo.kt
+│       └── movies
+│           └── MoviesRepo.kt
 ├── di
 │   ├── components
 │   │   └── AppComponent.kt
@@ -69,6 +71,7 @@ This project follows the famous MVVM architecture and best practices from Google
 │       ├── AppModule.kt
 │       ├── DatabaseModule.kt
 │       ├── NetworkModule.kt
+│       ├── RepoModule.kt
 │       └── ViewModelModule.kt
 ├── models
 │   └── FeedItem.kt
@@ -76,24 +79,27 @@ This project follows the famous MVVM architecture and best practices from Google
 │   ├── activities
 │   │   ├── feed
 │   │   │   ├── FeedActivity.kt
-│   │   │   ├── FeedHandler.kt
 │   │   │   └── FeedViewModel.kt
 │   │   ├── movie
 │   │   │   ├── MovieActivity.kt
-│   │   │   ├── MovieHandler.kt
 │   │   │   └── MovieViewModel.kt
-│   │   └── splash
-│   │       ├── SplashActivity.kt
-│   │       └── SplashViewModel.kt
+│   │   ├── splash
+│   │   │   ├── SplashActivity.kt
+│   │   │   └── SplashViewModel.kt
 │   └── adapters
 │       ├── FeedAdapter.kt
 │       └── MoviesAdapter.kt
 └── utils
     ├── BindingAdapters.kt
     ├── NetworkBoundResource.kt
-    └── retrofit
-        ├── FlowResourceCallAdapterFactory.kt
-        └── FlowResourceCallAdapter.kt
+    ├── retrofit
+    │   ├── FlowResourceCallAdapterFactory.kt
+    │   └── FlowResourceCallAdapter.kt
+    └── test
+        ├── EspressoIdlingResource.kt
+        └── OpenForTesting.kt
+
+21 directories, 30 files
 ```
 
 ## Credits 🤗
