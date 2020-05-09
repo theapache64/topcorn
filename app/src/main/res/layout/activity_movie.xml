@@ -5,10 +5,6 @@
     <data>
 
         <variable
-            name="handler"
-            type="com.theapache64.topcorn.ui.activities.movie.MovieHandler" />
-
-        <variable
             name="viewModel"
             type="com.theapache64.topcorn.ui.activities.movie.MovieViewModel" />
     </data>

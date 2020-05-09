@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.theapache64.topcorn.ui.activities.feed.FeedViewModel" />
-
-        <variable
-            name="handler"
-            type="com.theapache64.topcorn.ui.activities.feed.FeedHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +36,7 @@
             android:layout_height="@dimen/toolbar_icon_wh"
             android:layout_margin="18dp"
             android:background="?android:attr/selectableItemBackground"
-            android:onClick="@{()-> handler.onHeartClicked()}"
+            android:onClick="@{()-> viewModel.onHeartClicked()}"
             android:src="@drawable/ic_heart"
             android:tint="@color/red_800"
             app:layout_constraintBottom_toBottomOf="@id/ib_dark_mode"
@@ -56,7 +52,7 @@
             android:layout_marginEnd="18dp"
             android:layout_marginRight="18dp"
             android:background="?android:attr/selectableItemBackground"
-            android:onClick="@{()->handler.onToggleDarkModeClicked()}"
+            android:onClick="@{()->viewModel.onToggleDarkModeClicked()}"
             android:src="@drawable/ic_switch_dark_mode"
             android:tint="@color/toolbarIconColor"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"

@@ -27,7 +27,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 import kotlin.time.ExperimentalTime
 
-class FeedActivity : BaseAppCompatActivity(), FeedHandler {
+class FeedActivity : BaseAppCompatActivity() {
 
     companion object {
         const val GITHUB_URL = "https://github.com/theapache64/topcorn"
@@ -105,8 +105,16 @@ class FeedActivity : BaseAppCompatActivity(), FeedHandler {
             AppCompatDelegate.setDefaultNightMode(darkModeFlag)
         })
 
+        // Watching for github home
+        viewModel.openGithub.observe(this, Observer {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(GITHUB_URL)
+            )
+            startActivity(intent)
+        })
+
         binding.viewModel = viewModel
-        binding.handler = this
     }
 
     private fun goToMovieActivity(
@@ -121,18 +129,4 @@ class FeedActivity : BaseAppCompatActivity(), FeedHandler {
         )
         startActivity(MovieActivity.getStartIntent(this, movie), transition.toBundle())
     }
-
-    override fun onToggleDarkModeClicked() {
-        viewModel.toggleDarkMode()
-    }
-
-    override fun onHeartClicked() {
-        // goto github page ;)
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse(GITHUB_URL)
-        )
-        startActivity(intent)
-    }
-
 }

@@ -47,6 +47,8 @@ class FeedViewModel @Inject constructor(
         }
     }
 
+    val openGithub = SingleLiveEvent<Boolean>()
+
     @ExperimentalTime
     @ExperimentalCoroutinesApi
     val movies: LiveData<Resource<List<FeedItem>>> = moviesRepo
@@ -77,8 +79,12 @@ class FeedViewModel @Inject constructor(
     private val _darkMode = SingleLiveEvent<Boolean>()
     val darkMode: LiveData<Boolean> = _darkMode
 
-    fun toggleDarkMode() {
+    fun onToggleDarkModeClicked() {
         val newDarkMode = !(darkMode.value ?: false)
         _darkMode.value = newDarkMode
+    }
+
+    fun onHeartClicked() {
+        openGithub.value = true
     }
 }

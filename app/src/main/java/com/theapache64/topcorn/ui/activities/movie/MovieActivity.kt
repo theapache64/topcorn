@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.theapache64.topcorn.R
 import com.theapache64.topcorn.data.remote.Movie
@@ -13,7 +14,7 @@ import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MovieActivity : BaseAppCompatActivity(), MovieHandler {
+class MovieActivity : BaseAppCompatActivity() {
 
     companion object {
         const val KEY_MOVIE = "movie"
@@ -43,19 +44,20 @@ class MovieActivity : BaseAppCompatActivity(), MovieHandler {
         val movie = intent.getSerializableExtra(KEY_MOVIE) as Movie
         viewModel.init(movie)
 
-        binding.handler = this
+        viewModel.closeActivity.observe(this, Observer {
+            finish()
+        })
+
+        viewModel.openImdb.observe(this, Observer {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("$IMDB_DOT_COM${viewModel.movie!!.imdbUrl}")
+            )
+            startActivity(intent)
+        })
+
         binding.viewModel = viewModel
     }
 
-    override fun onBackButtonClicked() {
-        finish()
-    }
 
-    override fun onGoToImdbClicked() {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("$IMDB_DOT_COM${viewModel.movie!!.imdbUrl}")
-        )
-        startActivity(intent)
-    }
 }
