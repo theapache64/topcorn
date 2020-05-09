@@ -15,8 +15,8 @@ android {
         applicationId "com.theapache64.topcorn"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
-        versionCode 10109
-        versionName "1.0.1-alpha01"
+        versionCode 10199
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

@@ -1,17 +1,19 @@
 {
-  "version": 2,
+  "version": 1,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
   "applicationId": "com.theapache64.topcorn",
-  "variantName": "processReleaseResources",
+  "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 10099,
-      "versionName": "1.0.0",
+      "properties": [],
+      "versionCode": 10199,
+      "versionName": "10199",
+      "enabled": true,
       "outputFile": "app-release.apk"
     }
   ]
