@@ -17,7 +17,7 @@ built to *demonstrate MVVM with latest hot-trending Android development tools*.
 
 ## Download 📥
 
-- Download latest APK from [here](https://github.com/theapache64/topcorn/latest/releases/download/app-release.apk)
+- Download latest APK from [here](https://github.com/theapache64/topcorn/releases/latest/download/app-release.apk)
 
 ## Built With 🛠
 
