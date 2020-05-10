@@ -50,15 +50,18 @@ class FeedViewModel @Inject constructor(
     private val loadMovies = MutableLiveData<Boolean>()
 
     init {
+        println("Loading movies....")
         loadMovies.value = true
     }
 
     @ExperimentalCoroutinesApi
     @ExperimentalTime
     val movies: LiveData<Resource<List<FeedItem>>> = loadMovies.switchMap {
+        println("OKay I am the problem...")
         moviesRepo
             .getTop250Movies()
             .map {
+                println("Mapping...")
                 when (it.status) {
 
                     Resource.Status.LOADING -> {

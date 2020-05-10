@@ -57,6 +57,8 @@ class FeedActivity : BaseAppCompatActivity() {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
 
+        binding.rvFeed.adapter = adapter
+
         this.viewModel = ViewModelProvider(this, factory).get(FeedViewModel::class.java)
         this.viewModel.movies.observe(this, Observer {
 
@@ -72,8 +74,7 @@ class FeedActivity : BaseAppCompatActivity() {
                     println("Setting adapter with feed")
                     binding.lvFeed.hideLoading()
                     binding.rvFeed.visibility = View.VISIBLE
-                    adapter.feedItems = it.data!!
-                    binding.rvFeed.adapter = adapter
+                    adapter.updateData(it.data!!)
                 }
 
                 Resource.Status.ERROR -> {

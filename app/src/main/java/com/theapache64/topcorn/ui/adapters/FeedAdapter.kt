@@ -13,7 +13,7 @@ class FeedAdapter(
     private val onViewClicked: (position: Movie, poster: MaterialCardView, title: TextView) -> Unit
 ) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    lateinit var feedItems: List<FeedItem>
+    var feedItems = mutableListOf<FeedItem>()
     private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,6 +41,12 @@ class FeedAdapter(
         return MoviesAdapter(movies, onViewClicked).apply {
             stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
+    }
+
+    fun updateData(data: List<FeedItem>) {
+        feedItems.clear()
+        feedItems.addAll(data)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
