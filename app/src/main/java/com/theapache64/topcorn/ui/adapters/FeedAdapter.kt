@@ -31,13 +31,20 @@ class FeedAdapter(
         holder.bind(getItem(position))
     }
 
+    override fun getItemId(position: Int): Long {
+        return getItem(position).id
+    }
+
     /**
      * Adapter
      */
     inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val moviesAdapter by lazy {
-            val adapter = MoviesAdapter(onMovieClicked)
+            val adapter = MoviesAdapter(onMovieClicked).apply {
+                setHasStableIds(true)
+                stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            }
             binding.rvMovies.adapter = adapter
             adapter
         }

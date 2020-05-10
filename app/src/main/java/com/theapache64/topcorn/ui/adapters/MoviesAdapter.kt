@@ -28,6 +28,9 @@ class MoviesAdapter(
         holder.bind(getItem(position))
     }
 
+    override fun getItemId(position: Int): Long {
+        return getItem(position).id
+    }
 
     inner class ViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 

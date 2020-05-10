@@ -11,6 +11,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.theapache64.topcorn.R
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ActivityFeedBinding
@@ -52,6 +53,9 @@ class FeedActivity : BaseAppCompatActivity() {
         val adapter = FeedAdapter { movie, poster, title ->
             info("Movie clicked $movie")
             goToMovieActivity(movie, poster, title)
+        }.apply {
+            setHasStableIds(true)
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
 
         binding.rvFeed.adapter = adapter
