@@ -17,7 +17,6 @@ import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ActivityFeedBinding
 import com.theapache64.topcorn.ui.activities.movie.MovieActivity
 import com.theapache64.topcorn.ui.adapters.FeedAdapter
-import com.theapache64.topcorn.ui.adapters.MoviesAdapter
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -50,40 +49,30 @@ class FeedActivity : BaseAppCompatActivity() {
 
         val binding = bindContentView<ActivityFeedBinding>(R.layout.activity_feed)
 
+        println("Creating adapter")
+        val adapter = FeedAdapter { movie, poster, title ->
+            info("Movie clicked $movie")
+            goToMovieActivity(movie, poster, title)
+        }.apply {
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
+
         this.viewModel = ViewModelProvider(this, factory).get(FeedViewModel::class.java)
         this.viewModel.movies.observe(this, Observer {
 
             when (it.status) {
 
                 Resource.Status.LOADING -> {
+                    println("Loading feed")
                     binding.lvFeed.showLoading("Fetching movies..")
                     binding.rvFeed.visibility = View.INVISIBLE
                 }
 
                 Resource.Status.SUCCESS -> {
+                    println("Setting adapter with feed")
                     binding.lvFeed.hideLoading()
                     binding.rvFeed.visibility = View.VISIBLE
-
-                    val adapter = FeedAdapter(
-                        it.data!!,
-                        { movies ->
-                            MoviesAdapter(movies) { position, poster, title ->
-                                info("Movie clicked $position")
-                                val movie = movies[position]
-                                goToMovieActivity(movie, poster, title)
-                            }.apply {
-                                setHasStableIds(true)
-                                stateRestorationPolicy =
-                                    RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-                            }
-                        },
-                        { position ->
-                            info("Feed item clicked $position")
-                        }
-                    ).apply {
-                        setHasStableIds(true)
-                    }
-
+                    adapter.feedItems = it.data!!
                     binding.rvFeed.adapter = adapter
                 }
 

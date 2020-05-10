@@ -2,17 +2,18 @@ package com.theapache64.topcorn.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ItemFeedBinding
 import com.theapache64.topcorn.models.FeedItem
 
 class FeedAdapter(
-    private val feedItems: List<FeedItem>,
-    private val getMoviesAdapter: (List<Movie>) -> MoviesAdapter,
-    private val callback: (position: Int) -> Unit
+    private val onViewClicked: (position: Movie, poster: MaterialCardView, title: TextView) -> Unit
 ) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
+    lateinit var feedItems: List<FeedItem>
     private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,11 +37,11 @@ class FeedAdapter(
         holder.binding.rvMovies.adapter = adapter
     }
 
-    inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.root.setOnClickListener {
-                callback(layoutPosition)
-            }
+    private fun getMoviesAdapter(movies: List<Movie>): MoviesAdapter {
+        return MoviesAdapter(movies, onViewClicked).apply {
+            stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
     }
+
+    inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }

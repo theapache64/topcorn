@@ -26,11 +26,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Main -->
+        </activity>
+
+        <!-- Main -->
         <activity
             android:name=".ui.activities.feed.FeedActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- Movie -->
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- Movie -->
         <activity
             android:name=".ui.activities.movie.MovieActivity"
             android:theme="@style/AppTheme.NoActionBar" />

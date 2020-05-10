@@ -10,7 +10,7 @@ import com.theapache64.topcorn.databinding.ItemMovieBinding
 
 class MoviesAdapter(
     private val movies: List<Movie>,
-    private val callback: (position: Int, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
+    private val callback: (movie: Movie, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
 ) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater? = null
@@ -38,7 +38,7 @@ class MoviesAdapter(
     inner class ViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                callback(layoutPosition, binding.mcvPoster, binding.tvTitle)
+                callback(movies[layoutPosition], binding.mcvPoster, binding.tvTitle)
             }
         }
     }

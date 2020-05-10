@@ -1,10 +1,7 @@
 package com.theapache64.topcorn.ui.activities.feed
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.data.repositories.movies.MoviesRepo
 import com.theapache64.topcorn.models.FeedItem
@@ -15,6 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import kotlin.time.ExperimentalTime
+
 
 class FeedViewModel @Inject constructor(
     moviesRepo: MoviesRepo
@@ -49,32 +47,40 @@ class FeedViewModel @Inject constructor(
 
     val openGithub = SingleLiveEvent<Boolean>()
 
-    @ExperimentalTime
+    private val loadMovies = MutableLiveData<Boolean>()
+
+    init {
+        loadMovies.value = true
+    }
+
     @ExperimentalCoroutinesApi
-    val movies: LiveData<Resource<List<FeedItem>>> = moviesRepo
-        .getTop250Movies()
-        .map {
-            when (it.status) {
+    @ExperimentalTime
+    val movies: LiveData<Resource<List<FeedItem>>> = loadMovies.switchMap {
+        moviesRepo
+            .getTop250Movies()
+            .map {
+                when (it.status) {
 
-                Resource.Status.LOADING -> {
-                    EspressoIdlingResource.increment()
-                    Resource.loading()
-                }
+                    Resource.Status.LOADING -> {
+                        EspressoIdlingResource.increment()
+                        Resource.loading()
+                    }
 
-                Resource.Status.SUCCESS -> {
-                    val movies = it.data!!
-                    val feedItems = convertToFeed(movies)
-                    EspressoIdlingResource.decrement()
-                    Resource.success(feedItems)
-                }
+                    Resource.Status.SUCCESS -> {
+                        val movies = it.data!!
+                        val feedItems = convertToFeed(movies)
+                        EspressoIdlingResource.decrement()
+                        Resource.success(feedItems)
+                    }
 
-                Resource.Status.ERROR -> {
-                    EspressoIdlingResource.decrement()
-                    Resource.error(it.message!!)
+                    Resource.Status.ERROR -> {
+                        EspressoIdlingResource.decrement()
+                        Resource.error(it.message!!)
+                    }
                 }
             }
-        }
-        .asLiveData(viewModelScope.coroutineContext)
+            .asLiveData(viewModelScope.coroutineContext)
+    }
 
     private val _darkMode = SingleLiveEvent<Boolean>()
     val darkMode: LiveData<Boolean> = _darkMode

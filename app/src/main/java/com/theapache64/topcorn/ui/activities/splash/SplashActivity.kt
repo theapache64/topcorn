@@ -13,6 +13,7 @@ import dagger.android.AndroidInjection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
+import kotlin.time.ExperimentalTime
 
 class SplashActivity : BaseAppCompatActivity() {
 
