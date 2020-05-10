@@ -10,9 +10,9 @@ import com.google.android.material.card.MaterialCardView
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ItemMovieBinding
 
-class MoviesAdapter2(
+class MoviesAdapter(
     private val callback: (movie: Movie, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
-) : ListAdapter<Movie, MoviesAdapter2.ViewHolder>(MovieDiffCallback()) {
+) : ListAdapter<Movie, MoviesAdapter.ViewHolder>(MovieDiffCallback()) {
 
     private var inflater: LayoutInflater? = null
 

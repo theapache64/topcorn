@@ -11,10 +11,10 @@ import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ItemFeedBinding
 import com.theapache64.topcorn.models.FeedItem
 
-class FeedAdapter2(
+class FeedAdapter(
     private val onMovieClicked: (movie: Movie, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
 ) :
-    ListAdapter<FeedItem, FeedAdapter2.ViewHolder>(FeedDiffCallback()) {
+    ListAdapter<FeedItem, FeedAdapter.ViewHolder>(FeedDiffCallback()) {
 
     private var inflater: LayoutInflater? = null
 
@@ -37,7 +37,7 @@ class FeedAdapter2(
     inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val moviesAdapter by lazy {
-            val adapter = MoviesAdapter2(onMovieClicked)
+            val adapter = MoviesAdapter(onMovieClicked)
             binding.rvMovies.adapter = adapter
             adapter
         }

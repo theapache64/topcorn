@@ -19,6 +19,10 @@ class FeedViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
+
+        /**
+         * To convert movie list to categorized feed
+         */
         fun convertToFeed(movies: List<Movie>): List<FeedItem> {
 
             val genreSet = mutableSetOf<String>()
@@ -50,18 +54,15 @@ class FeedViewModel @Inject constructor(
     private val loadMovies = MutableLiveData<Boolean>()
 
     init {
-        println("Loading movies....")
         loadMovies.value = true
     }
 
     @ExperimentalCoroutinesApi
     @ExperimentalTime
     val movies: LiveData<Resource<List<FeedItem>>> = loadMovies.switchMap {
-        println("OKay I am the problem...")
         moviesRepo
             .getTop250Movies()
             .map {
-                println("Mapping...")
                 when (it.status) {
 
                     Resource.Status.LOADING -> {

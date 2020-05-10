@@ -15,7 +15,7 @@ import com.theapache64.topcorn.R
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ActivityFeedBinding
 import com.theapache64.topcorn.ui.activities.movie.MovieActivity
-import com.theapache64.topcorn.ui.adapters.FeedAdapter2
+import com.theapache64.topcorn.ui.adapters.FeedAdapter
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -49,7 +49,7 @@ class FeedActivity : BaseAppCompatActivity() {
         val binding = bindContentView<ActivityFeedBinding>(R.layout.activity_feed)
 
         println("Creating adapter")
-        val adapter = FeedAdapter2 { movie, poster, title ->
+        val adapter = FeedAdapter { movie, poster, title ->
             info("Movie clicked $movie")
             goToMovieActivity(movie, poster, title)
         }
