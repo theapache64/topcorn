@@ -3,51 +3,59 @@ package com.theapache64.topcorn.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ItemFeedBinding
 import com.theapache64.topcorn.models.FeedItem
 
-class FeedAdapter(
-    private val onViewClicked: (position: Movie, poster: MaterialCardView, title: TextView) -> Unit
-) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter2(
+    private val onMovieClicked: (movie: Movie, mcvPoster: MaterialCardView, tvTitle: TextView) -> Unit
+) :
+    ListAdapter<FeedItem, FeedAdapter2.ViewHolder>(FeedDiffCallback()) {
 
-    var feedItems = mutableListOf<FeedItem>()
     private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.context)
         }
+
         val binding = ItemFeedBinding.inflate(inflater!!, parent, false)
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = feedItems.size
-
-    override fun getItemId(position: Int): Long {
-        return feedItems[position].id
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val feed = feedItems[position]
-        holder.binding.feed = feed
-        val adapter = getMoviesAdapter(feed.movies)
-        holder.binding.rvMovies.adapter = adapter
+        holder.bind(getItem(position))
     }
 
-    private fun getMoviesAdapter(movies: List<Movie>): MoviesAdapter {
-        return MoviesAdapter(movies, onViewClicked).apply {
-            stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    /**
+     * Adapter
+     */
+    inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        private val moviesAdapter by lazy {
+            val adapter = MoviesAdapter2(onMovieClicked)
+            binding.rvMovies.adapter = adapter
+            adapter
+        }
+
+        fun bind(feed: FeedItem) {
+            binding.feed = feed
+            moviesAdapter.submitList(feed.movies)
         }
     }
+}
 
-    fun updateData(data: List<FeedItem>) {
-        feedItems.clear()
-        feedItems.addAll(data)
-        notifyDataSetChanged()
+class FeedDiffCallback : DiffUtil.ItemCallback<FeedItem>() {
+
+    override fun areItemsTheSame(oldItem: FeedItem, newItem: FeedItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    inner class ViewHolder(val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
+    override fun areContentsTheSame(oldItem: FeedItem, newItem: FeedItem): Boolean {
+        return oldItem == newItem
+    }
 }
