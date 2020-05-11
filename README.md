@@ -111,8 +111,8 @@ This project follows the famous MVVM architecture and best practices from Google
 
 ## TODO 🗒️
 
-  - [ ] Improve algorithms and code review 
-  - [ ] Add test cases
+  - [x] Improve algorithms and code review 
+  - [x] Add test cases
   - [ ] Integrate OMDB API to add search feature
   - [ ] Add favorites
 
