@@ -49,7 +49,6 @@ class FeedActivity : BaseAppCompatActivity() {
 
         val binding = bindContentView<ActivityFeedBinding>(R.layout.activity_feed)
 
-        println("Creating adapter")
         val adapter = FeedAdapter { movie, poster, title ->
             info("Movie clicked $movie")
             goToMovieActivity(movie, poster, title)
@@ -66,13 +65,11 @@ class FeedActivity : BaseAppCompatActivity() {
             when (it.status) {
 
                 Resource.Status.LOADING -> {
-                    println("Loading feed")
                     binding.lvFeed.showLoading("Fetching movies..")
                     binding.rvFeed.visibility = View.INVISIBLE
                 }
 
                 Resource.Status.SUCCESS -> {
-                    println("Setting adapter with feed")
                     binding.lvFeed.hideLoading()
                     binding.rvFeed.visibility = View.VISIBLE
                     adapter.submitList(it.data!!)

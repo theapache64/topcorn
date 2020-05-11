@@ -109,7 +109,6 @@ class FeedActivityInsMockTest {
         val feedIntent = FeedActivity.getStartIntent(context)
         ac = ActivityScenario.launch(feedIntent)
         idlingRule.dataBindingIdlingResource.monitorActivity(ac)
-        println(fakeRepo)
     }
 
     @After
