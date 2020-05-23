@@ -1,7 +1,9 @@
 package com.theapache64.topcorn.ui.activities.feed
 
 
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
+import com.theapache64.topcorn.R
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.data.repositories.movies.MoviesRepo
 import com.theapache64.topcorn.models.FeedItem
@@ -20,10 +22,13 @@ class FeedViewModel @Inject constructor(
 
     companion object {
 
+        private const val SORT_ORDER_YEAR = 1
+        private const val SORT_ORDER_RATING = 2
+
         /**
          * To convert movie list to categorized feed
          */
-        fun convertToFeed(movies: List<Movie>): List<FeedItem> {
+        fun convertToFeed(movies: List<Movie>, sortOrder: Int): List<FeedItem> {
 
             val genreSet = mutableSetOf<String>()
 
@@ -36,8 +41,19 @@ class FeedViewModel @Inject constructor(
             val feedItems = mutableListOf<FeedItem>()
 
             for ((index, genre) in genreSet.withIndex()) {
+
                 val genreMovies = movies
                     .filter { it.genre.contains(genre) }
+                    .sortedByDescending {
+                        when (sortOrder) {
+                            SORT_ORDER_RATING -> it.rating
+                            SORT_ORDER_YEAR -> it.year.toFloat()
+                            else -> {
+                                throw IllegalArgumentException("TSH : sort order '$sortOrder' not managed")
+                            }
+                        }
+                    }
+
                 feedItems.add(
                     FeedItem(
                         index.toLong(),
@@ -49,17 +65,20 @@ class FeedViewModel @Inject constructor(
         }
     }
 
+    private val _toast = MutableLiveData<Int>()
+    val toast: LiveData<Int> = _toast
+
     val openGithub = SingleLiveEvent<Boolean>()
 
-    private val loadMovies = MutableLiveData<Boolean>()
+    private val sortedOrder = MutableLiveData<Int>()
 
     init {
-        loadMovies.value = true
+        sortedOrder.value = SORT_ORDER_YEAR
     }
 
     @ExperimentalCoroutinesApi
     @ExperimentalTime
-    val movies: LiveData<Resource<List<FeedItem>>> = loadMovies.switchMap {
+    val movies: LiveData<Resource<List<FeedItem>>> = sortedOrder.switchMap { sortOrder ->
         moviesRepo
             .getTop250Movies()
             .map {
@@ -72,7 +91,7 @@ class FeedViewModel @Inject constructor(
 
                     Resource.Status.SUCCESS -> {
                         val movies = it.data!!
-                        val feedItems = convertToFeed(movies)
+                        val feedItems = convertToFeed(movies, sortOrder)
                         EspressoIdlingResource.decrement()
                         Resource.success(feedItems)
                     }
@@ -96,5 +115,39 @@ class FeedViewModel @Inject constructor(
 
     fun onHeartClicked() {
         openGithub.value = true
+    }
+
+    /*
+     * Sort order
+     */
+    val sortOrderIcon = ObservableInt(R.drawable.ic_star)
+
+    fun onToggleSortOrderClicked() {
+
+        val newSortOrderIcon = if (sortOrderIcon.get() == R.drawable.ic_calendar) {
+            // change to stars
+            R.drawable.ic_star
+        } else {
+            R.drawable.ic_calendar
+        }
+
+        when (newSortOrderIcon) {
+
+            R.drawable.ic_star -> {
+                // load movies by year
+                sortedOrder.value = SORT_ORDER_YEAR
+                _toast.value = R.string.feed_toast_sort_year
+            }
+
+            R.drawable.ic_calendar -> {
+                // load movies by star
+                sortedOrder.value = SORT_ORDER_RATING
+                _toast.value = R.string.feed_toast_sort_rating
+            }
+
+            else -> throw IllegalArgumentException("TSH : $newSortOrderIcon sort order not managed")
+        }
+
+        sortOrderIcon.set(newSortOrderIcon)
     }
 }

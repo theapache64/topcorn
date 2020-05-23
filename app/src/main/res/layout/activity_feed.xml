@@ -29,6 +29,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <!--Sort order-->
+        <ImageButton
+            android:id="@+id/ib_sort_order"
+            android:layout_width="@dimen/toolbar_icon_wh"
+            android:layout_height="@dimen/toolbar_icon_wh"
+            android:layout_margin="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{()-> viewModel.onToggleSortOrderClicked()}"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@{viewModel.sortOrderIcon}"
+            android:tint="@color/toolbarIconColor"
+            app:layout_constraintBottom_toBottomOf="@id/ib_heart"
+            app:layout_constraintEnd_toStartOf="@id/ib_heart"
+            app:layout_constraintTop_toTopOf="@id/ib_heart"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_calendar" />
+
         <!--Heart-->
         <ImageButton
             android:id="@+id/ib_heart"

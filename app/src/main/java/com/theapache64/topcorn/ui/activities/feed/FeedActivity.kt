@@ -21,6 +21,7 @@ import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
+import com.theapache64.twinkill.utils.extensions.toast
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -100,6 +101,11 @@ class FeedActivity : BaseAppCompatActivity() {
                 Uri.parse(GITHUB_URL)
             )
             startActivity(intent)
+        })
+
+        // Watching for toast
+        viewModel.toast.observe(this, Observer { message ->
+            toast(message)
         })
 
         binding.viewModel = viewModel
