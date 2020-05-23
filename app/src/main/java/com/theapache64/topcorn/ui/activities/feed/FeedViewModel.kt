@@ -22,7 +22,7 @@ class FeedViewModel @Inject constructor(
 
     companion object {
 
-        private const val SORT_ORDER_YEAR = 1
+        const val SORT_ORDER_YEAR = 1
         private const val SORT_ORDER_RATING = 2
 
         /**

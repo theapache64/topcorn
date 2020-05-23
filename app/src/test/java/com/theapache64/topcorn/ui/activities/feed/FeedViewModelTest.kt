@@ -34,7 +34,7 @@ class FeedViewModelTest {
         }
 
         val movies = listOf<Movie>(fakeMovie)
-        val feedItems = FeedViewModel.convertToFeed(movies)
+        val feedItems = FeedViewModel.convertToFeed(movies, FeedViewModel.SORT_ORDER_YEAR)
 
         feedItems.size.should.equal(2)
         feedItems.forEach { it.movies.size.should.equal(1) }

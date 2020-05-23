@@ -46,7 +46,8 @@ class MovieActivityTest {
         "https://avatars1.githubusercontent.com/u/1135007?s=460&v=4",
         "/title/tt8629748/",
         "The Fake Movie",
-        8.5f
+        8.5f,
+        2020
     )
 
     @Before
