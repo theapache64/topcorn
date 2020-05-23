@@ -58,7 +58,8 @@ class FeedViewModel @Inject constructor(
                     FeedItem(
                         index.toLong(),
                         genre,
-                        genreMovies.sortedByDescending { it.rating })
+                        genreMovies
+                    )
                 )
             }
             return feedItems
