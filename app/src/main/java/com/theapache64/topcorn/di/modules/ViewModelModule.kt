@@ -1,6 +1,7 @@
 package com.theapache64.topcorn.di.modules
 
 import androidx.lifecycle.ViewModel
+import com.theapache64.topcorn.ui.activities.favorites.FavoritesViewModel
 import com.theapache64.topcorn.ui.activities.feed.FeedViewModel
 import com.theapache64.topcorn.ui.activities.movie.MovieViewModel
 import com.theapache64.topcorn.ui.activities.splash.SplashViewModel
@@ -32,5 +33,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieViewModel::class)
     abstract fun bindMovieViewModel(viewModel: MovieViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoritesViewModel::class)
+    abstract fun bindFavoritesViewModel(viewModel: FavoritesViewModel): ViewModel
 
 }

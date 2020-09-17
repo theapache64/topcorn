@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.theapache64.topcorn.R
 import com.theapache64.topcorn.data.remote.Movie
 import com.theapache64.topcorn.databinding.ActivityFeedBinding
+import com.theapache64.topcorn.ui.activities.favorites.FavoritesActivity
 import com.theapache64.topcorn.ui.activities.movie.MovieActivity
 import com.theapache64.topcorn.ui.adapters.FeedAdapter
 import com.theapache64.twinkill.logger.info
@@ -96,11 +97,12 @@ class FeedActivity : BaseAppCompatActivity() {
 
         // Watching for github home
         viewModel.openGithub.observe(this, Observer {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(GITHUB_URL)
-            )
-            startActivity(intent)
+            startActivity(Intent(this, FavoritesActivity::class.java))
+//            val intent = Intent(
+//                Intent.ACTION_VIEW,
+//                Uri.parse(GITHUB_URL)
+//            )
+//            startActivity(intent)
         })
 
         // Watching for toast
