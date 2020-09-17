@@ -14,7 +14,7 @@ class FavoritesViewModel @Inject constructor(
 
     val favoritesMovies = MutableLiveData<List<FavoriteMovie>>()
 
-    init {
+    fun getFavorites() {
         viewModelScope.launch {
             favoritesMovies.postValue(moviesRepo.getAllFavoriteMovies())
         }
