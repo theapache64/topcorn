@@ -95,14 +95,8 @@ class FeedActivity : BaseAppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(darkModeFlag)
         })
 
-        // Watching for github home
-        viewModel.openGithub.observe(this, Observer {
+        viewModel.openFavorites.observe(this, Observer {
             startActivity(Intent(this, FavoritesActivity::class.java))
-//            val intent = Intent(
-//                Intent.ACTION_VIEW,
-//                Uri.parse(GITHUB_URL)
-//            )
-//            startActivity(intent)
         })
 
         // Watching for toast

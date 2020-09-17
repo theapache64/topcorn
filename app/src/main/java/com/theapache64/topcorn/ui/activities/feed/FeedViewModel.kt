@@ -69,7 +69,7 @@ class FeedViewModel @Inject constructor(
     private val _toast = MutableLiveData<Int>()
     val toast: LiveData<Int> = _toast
 
-    val openGithub = SingleLiveEvent<Boolean>()
+    val openFavorites = SingleLiveEvent<Boolean>()
 
     private val sortedOrder = MutableLiveData<Int>()
 
@@ -115,7 +115,7 @@ class FeedViewModel @Inject constructor(
     }
 
     fun onHeartClicked() {
-        openGithub.value = true
+        openFavorites.value = true
     }
 
     /*

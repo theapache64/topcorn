@@ -1,5 +1,6 @@
 package com.theapache64.topcorn.ui.activities.movie
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.theapache64.topcorn.data.local.FavoriteMovie
@@ -13,8 +14,14 @@ class MovieViewModel @Inject constructor(
     private val moviesRepo: MoviesRepo
 ) : ViewModel() {
 
+    val isFavorite = MutableLiveData<Boolean>()
+
     fun init(movie: Movie) {
         this.movie = movie
+        viewModelScope.launch {
+            val favorites = moviesRepo.getAllFavoriteMovies()
+            isFavorite.postValue(favorites.any { it.imageUrl == movie.imageUrl })
+        }
     }
 
     val openImdb = SingleLiveEvent<Boolean>()
@@ -27,21 +34,27 @@ class MovieViewModel @Inject constructor(
 
     fun onFavoriteButtonClicked() {
         viewModelScope.launch {
-            moviesRepo.insertToFavoritesAsync(
-                FavoriteMovie(
-                    movie?.actors,
-                    movie?.desc,
-                    movie?.directors,
-                    movie?.genre,
-                    movie?.imageUrl,
-                    movie?.thumbUrl,
-                    movie?.imdbUrl,
-                    movie?.name,
-                    movie?.rating,
-                    movie?.year
-                )
-            )
+            when (isFavorite.value) {
+                false -> {
+                    moviesRepo.insertToFavoritesAsync(
+                        FavoriteMovie(
+                            movie?.actors,
+                            movie?.desc,
+                            movie?.directors,
+                            movie?.genre,
+                            movie?.imageUrl,
+                            movie?.thumbUrl,
+                            movie?.imdbUrl,
+                            movie?.name,
+                            movie?.rating,
+                            movie?.year
+                        )
+                    )
+                }
+                true -> moviesRepo.deleteByUrlAsync(movie?.imageUrl ?: "")
+            }
         }
+        isFavorite.value = isFavorite.value != true
     }
 
     fun onGoToImdbClicked() {

@@ -40,7 +40,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:onClick="@{()->viewModel.onFavoriteButtonClicked()}"
                 android:padding="18dp"
-                android:src="@drawable/ic_heart"
+                android:src="@drawable/ic_star_border_24"
                 android:tint="@color/toolbarIconColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -72,6 +72,12 @@ class MoviesRepo @Inject constructor(
         }
     }
 
+    suspend fun deleteByUrlAsync(url: String) = coroutineScope {
+        async {
+            moviesDao.deleteByUrl(url)
+        }
+    }
+
     @ExperimentalTime
     private fun isExpired(lastSynced: Long): Boolean {
         val currentTime = System.currentTimeMillis()
