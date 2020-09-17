@@ -13,10 +13,13 @@ class FavoritesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val favoritesMovies = MutableLiveData<List<FavoriteMovie>>()
+    val isListEmpty = MutableLiveData<Boolean>()
 
     fun getFavorites() {
         viewModelScope.launch {
-            favoritesMovies.postValue(moviesRepo.getAllFavoriteMovies())
+            val favorites = moviesRepo.getAllFavoriteMovies()
+            favoritesMovies.postValue(favorites)
+            isListEmpty.value = favorites.isNullOrEmpty()
         }
     }
 }

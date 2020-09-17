@@ -2,6 +2,9 @@ package com.theapache64.topcorn.ui.activities.favorites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.theapache64.topcorn.R
@@ -22,6 +25,11 @@ class FavoritesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+
         viewModel = ViewModelProvider(this, factory).get(FavoritesViewModel::class.java)
 
         viewModel.favoritesMovies.observe(this, Observer {
@@ -29,10 +37,19 @@ class FavoritesActivity : AppCompatActivity() {
                 startActivity(MovieActivity.getStartIntent(this, movie))
             }
         })
+
+        viewModel.isListEmpty.observe(this, Observer { empty ->
+            empty_text.visibility = if (empty) VISIBLE else GONE
+        })
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getFavorites()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 }
