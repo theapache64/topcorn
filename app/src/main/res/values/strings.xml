@@ -8,5 +8,6 @@
     <string name="action_open_imdb">OPEN IMDB</string>
     <string name="feed_toast_sort_year">Sorted by year</string>
     <string name="feed_toast_sort_rating">Sorted by rating</string>
+    <string name="favorites">Favorites</string>
     <string name="list_is_empty">Favorite list is empty</string>
 </resources>

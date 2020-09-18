@@ -28,6 +28,7 @@ class FavoritesActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+            setTitle(R.string.favorites)
         }
 
         viewModel = ViewModelProvider(this, factory).get(FavoritesViewModel::class.java)
