@@ -12,6 +12,7 @@ import com.theapache64.topcorn.databinding.ActivityMovieBinding
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_movie.*
 import javax.inject.Inject
 
 class MovieActivity : BaseAppCompatActivity() {
@@ -43,6 +44,10 @@ class MovieActivity : BaseAppCompatActivity() {
         viewModel = ViewModelProvider(this, factory).get(MovieViewModel::class.java)
         val movie = intent.getSerializableExtra(KEY_MOVIE) as Movie
         viewModel.init(movie)
+
+        viewModel.isFavorite.observe(this, Observer {
+            ib_favorite_toggle.setImageResource(if (it) R.drawable.ic_star_24 else R.drawable.ic_star_border_24)
+        })
 
         viewModel.closeActivity.observe(this, Observer {
             finish()

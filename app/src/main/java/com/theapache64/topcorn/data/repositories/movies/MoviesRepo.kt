@@ -2,6 +2,7 @@ package com.theapache64.topcorn.data.repositories.movies
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.theapache64.topcorn.data.local.FavoriteMovie
 import com.theapache64.topcorn.data.local.daos.MoviesDao
 import com.theapache64.topcorn.data.remote.ApiInterface
 import com.theapache64.topcorn.data.remote.Movie
@@ -10,6 +11,8 @@ import com.theapache64.topcorn.utils.test.OpenForTesting
 import com.theapache64.twinkill.network.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
@@ -59,6 +62,20 @@ class MoviesRepo @Inject constructor(
             }
 
         }.asFlow().flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getAllFavoriteMovies() = moviesDao.getAllFavoriteMovies()
+
+    suspend fun insertToFavoritesAsync(favoriteMovie: FavoriteMovie) = coroutineScope {
+        async {
+            moviesDao.insert(favoriteMovie)
+        }
+    }
+
+    suspend fun deleteByUrlAsync(url: String) = coroutineScope {
+        async {
+            moviesDao.deleteByUrl(url)
+        }
     }
 
     @ExperimentalTime

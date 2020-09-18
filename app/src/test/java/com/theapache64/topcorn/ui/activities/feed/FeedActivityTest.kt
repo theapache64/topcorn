@@ -1,21 +1,12 @@
 package com.theapache64.topcorn.ui.activities.feed
 
-import android.app.Activity
-import android.app.Instrumentation
 import android.content.Context
-import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.Intents.intending
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasData
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -36,7 +27,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.allOf
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -111,20 +101,6 @@ class FeedActivityTest {
     @After
     fun after() {
         ac.close()
-    }
-
-    @Test
-    fun feed_onHeartClicked_goToGitHub() = runBlockingTest {
-        Intents.init()
-        val intentResult = Instrumentation.ActivityResult(Activity.RESULT_OK, Intent())
-        val sendingIntent = allOf(
-            hasAction(Intent.ACTION_VIEW),
-            hasData(FeedActivity.GITHUB_URL)
-        )
-        intending(sendingIntent).respondWith(intentResult)
-        onView(withId(R.id.ib_heart)).check(matches(isDisplayed())).perform(click())
-        intended(sendingIntent)
-        Intents.release()
     }
 
     @Test

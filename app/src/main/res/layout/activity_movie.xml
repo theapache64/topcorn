@@ -33,6 +33,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
+            <ImageButton
+                android:id="@+id/ib_favorite_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{()->viewModel.onFavoriteButtonClicked()}"
+                android:padding="18dp"
+                android:src="@drawable/ic_star_border_24"
+                android:tint="@color/toolbarIconColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
             <!--Image-->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcv_poster"
