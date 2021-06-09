@@ -34,7 +34,7 @@ data class Movie(
     @Json(name = "rating")
     val rating: Float, // 8.2
     @Json(name = "year")
-    val year: Int
+    val year: Int?
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
